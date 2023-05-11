@@ -1,45 +1,80 @@
 <script setup>
+
+import { ref } from 'vue';
+
+let todos =ref (['A','B','C'])
+
+let newTodo =ref('')
+
+function jim() {
+todos.value.push(newTodo.value)
+newTodo.value=''
+}
+
+function trash(index) {
+todos.value.splice(index,1)
+
+
+}
+ 
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <h1> My Todo Application</h1>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+  <ul>
+  <li v-for="(todo,index) in todos">
+    <button @click="trash(index)">trash</button>
+    {{ index}}
+    {{ todo }}  
+  </li>
+  </ul>
+  <input v-model="newTodo" @keydown.enter="jim">
+  <button @click="jim"> Add todo</button>
 
-  <main>
-    <TheWelcome />
-  </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<style>
+
+button{
+
+background-color:#6246ea;
+color: #fffffe;
+text-align: center;
+border-radius: 4px;
+border-style: none;
+font-size: 16px;
+padding: 8px 16px;
+margin: 2px 0;
+cursor: pointer;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.center {
+text-align: center;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+h1{
+
+color: black;
 }
+
+body{
+
+  background-color: #e45858;
+}
+
+button:disabled {
+background-color: gray;
+cursor: not-allowed;
+}
+
+
+
+li{
+
+color: white;
+} 
+
 </style>
