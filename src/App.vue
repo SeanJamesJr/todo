@@ -3,11 +3,15 @@
 import { ref } from 'vue';
 
 let todos =ref (['A','B','C'])
-
 let newTodo =ref('')
 
 function jim() {
-todos.value.push(newTodo.value)
+todos.value.push({
+text: newTodo.value,
+complete:false
+})
+
+
 newTodo.value=''
 }
 
@@ -24,9 +28,9 @@ todos.value.splice(index,1)
 
   <ul>
   <li v-for="(todo,index) in todos">
+    <input type="checkbox" v-model="todo.complete">
     <button @click="trash(index)">trash</button>
-    {{ index}}
-    {{ todo }}  
+   {{ todo.text }}  
   </li>
   </ul>
   <input v-model="newTodo" @keydown.enter="jim">
@@ -62,7 +66,9 @@ color: black;
 
 body{
 
-  background-color: #e45858;
+  background-color: #abd1c6;
+
+  text-align: center;
 }
 
 button:disabled {
