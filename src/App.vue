@@ -1,9 +1,14 @@
 <script setup>
 
-import { ref } from 'vue';
 
-let todos =ref (['A','B','C'])
+import { ref,watch } from 'vue';
+
+let todos =ref (JSON.parse(window.localStorage.getItem('todos')))
 let newTodo =ref('')
+
+watch(todos, function(value){
+window.localStorage.setItem('todos',JSON.stringify(value))
+}, {deep: true})
 
 function jim() {
 todos.value.push({
@@ -24,6 +29,10 @@ todos.value.splice(index,1)
 </script>
 
 <template>
+
+  <head><link rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
   <h1> My Todo Application</h1>
 
   <ul>
@@ -40,9 +49,11 @@ todos.value.splice(index,1)
 
 <style>
 
+@import url();
+
 button{
 
-background-color:#6246ea;
+background-color:#ff8906;
 color: #fffffe;
 text-align: center;
 border-radius: 4px;
@@ -61,26 +72,43 @@ text-align: center;
 
 h1{
 
-color: black;
+color: #fffffe;
 }
 
 body{
 
-  background-color: #abd1c6;
+  background-color: #0f0e17;
 
   text-align: center;
+
+  font-style: Bebas Neue;
 }
 
 button:disabled {
-background-color: gray;
+background-color: #f25f4c;
 cursor: not-allowed;
 }
 
+input[type="checkbox"]{
+appearance: none;
+-webkit-appearance: none;
+height: 20px;
+width: 20px;
+background-color: #fffffe;
+border-radius: 5px;
+cursor: pointer;
+
+}
 
 
 li{
 
 color: white;
 } 
+
+input [type="checkbox"]::after{
+
+  content:"\f14a";
+}
 
 </style>
