@@ -30,15 +30,12 @@ todos.value.splice(index,1)
 
 <template>
 
-  <head><link rel="stylesheet"
-     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  </head>
   <h1> My Todo Application</h1>
 
   <ul>
-  <li v-for="(todo,index) in todos">
+  <li v-for="(todo, index) in todos" :class= "{completed: todo.complete}" >
     <input type="checkbox" v-model="todo.complete">
-    <button @click="trash(index)">trash</button>
+    <button @click="trash(index)">🗑️</button>
    {{ todo.text }}  
   </li>
   </ul>
@@ -48,12 +45,16 @@ todos.value.splice(index,1)
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
 
-@import url();
+li{
+
+color: white;
+} 
 
 button{
 
-background-color:#ff8906;
+background-color:grey;
 color: #fffffe;
 text-align: center;
 border-radius: 4px;
@@ -89,26 +90,45 @@ background-color: #f25f4c;
 cursor: not-allowed;
 }
 
+
+
 input[type="checkbox"]{
 appearance: none;
 -webkit-appearance: none;
-height: 20px;
-width: 20px;
-background-color: #fffffe;
+height: 50px;
+width: 50px;
+background-color: #d5d5d5;
 border-radius: 5px;
 cursor: pointer;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+outline: none;
+}
+
+input[type="checkbox"]::after{
+
+  font-family: "Font Awesome 5 Free";
+  content:"\f00c";
+  font-weight: 900;
+  font-size: 50px;
+  color: white;
+  display: none;
+}
+
+input[type="checkbox"]:hover {
+background-color: #a5a5a5;
+
+}
+input[type='checkbox']:checked{
+background-color: #5bcd3e;
 
 }
 
+input[type="checkbox"]:checked::after {
+display:block
 
-li{
 
-color: white;
-} 
-
-input [type="checkbox"]::after{
-
-  content:"\f14a";
 }
 
 </style>
