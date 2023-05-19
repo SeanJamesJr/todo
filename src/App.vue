@@ -3,7 +3,7 @@
 
 import { ref, watch } from 'vue';
 
-let todos = ref(JSON.parse(window.localStorage.getItem('todos')))
+let todos = ref(JSON.parse(window.localStorage.getItem('todos'))?? [])
 let newTodo = ref('')
 let filter = ref('all')
 
@@ -60,7 +60,7 @@ function activeFilter(todo) {
     <label>Complete</label>
 
   </p>
-  <input v-model="newTodo" @keydown.enter="jim" placeholder=" Press enter to add to list">
+  <input   v-model="newTodo" @keydown.enter="jim" placeholder=" Press enter to add to list">
   
   <ul>
     <li v-for="(todo, index) in todos.filter(todoFilter)" :class="{ completed: todo.complete }">
@@ -78,9 +78,15 @@ function activeFilter(todo) {
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 
-input{
 
-  border-radius: 150px;
+
+
+
+
+input{
+  font-size: 25px;
+  border-radius: 25px;
+  background-color: #eebbc3;
 }
 
 li {
@@ -96,16 +102,17 @@ button {
   text-align: center;
   border-radius: 4px;
   border-style: none;
-  font-size: 16px;
+  font-size: 20px;
   padding: 8px 16px;
   margin: 2px 0;
   cursor: pointer;
+  height: 50px;
+  width: 50px;
 }
 
 .center {
   text-align: center;
 }
-
 
 
 h1 {
@@ -116,7 +123,8 @@ h1 {
 
 body {
 
-  background-color: white;
+  
+  background-color: #b8c1ec;
 
   text-align: center;
 
@@ -133,6 +141,8 @@ button:disabled {
 
 
 input[type="checkbox"] {
+
+  border-radius: 50px;
   appearance: none;
   -webkit-appearance: none;
   height: 50px;
@@ -144,10 +154,10 @@ input[type="checkbox"] {
   align-items: center;
   justify-content: center;
   outline: none;
+  font-size: 25px;
 }
 
 input[type="checkbox"]::after {
-
   font-family: "Font Awesome 5 Free";
   content: "\f00c";
   font-weight: 900;
@@ -158,15 +168,16 @@ input[type="checkbox"]::after {
 
 input[type="checkbox"]:hover {
   background-color: #a5a5a5;
-
 }
 
 input[type='checkbox']:checked {
   background-color: #5bcd3e;
 
+  
 }
 
 input[type="checkbox"]:checked::after {
   display: block
+  
 }
 </style>
